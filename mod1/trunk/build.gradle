@@ -9,13 +9,7 @@ archivesBaseName = "mod1"
 mainClassName = 'Mod1Class'
 
 dependencies {
-    if (rootProject == project) {
-        println("${project.name}: using repo dependencies")
-        compile "${group}:mod2:1.0.0.SNAPSHOT"
-    } else {
-        println("${project.name}: using project dependencies")
-        compile project(":mod2")
-    }
+    compile dependency.project(':mod2', "${group}:mod2:1.0.0.SNAPSHOT")
 }
 
 publishing {

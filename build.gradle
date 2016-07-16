@@ -1,3 +1,0 @@
-allprojects {
-    println "${name} - ${projectDir}"
-}

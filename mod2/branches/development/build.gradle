@@ -6,13 +6,7 @@ group = "com.foo"
 archivesBaseName = "mod2"
 
 dependencies {
-    if (rootProject == project) {
-        println("${project.name}: using repo dependencies")
-        compile "${group}:mod3:1.0.0.SNAPSHOT"
-    } else {
-        println("${project.name}: using project dependencies")
-        compile project(":mod3")
-    }
+    compile dependency.project(':mod3', "${group}:mod3:1.0.0.SNAPSHOT")
 }
 
 publishing {
