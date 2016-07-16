@@ -2,18 +2,6 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'hello'
 
-group = "com.foo"
-archivesBaseName = "mod3"
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifactId = archivesBaseName
-        }
-    }
-}
-
 dependencies {
     compile dependency.project(':share:mod4', "${group}:mod4:1.0.0.SNAPSHOT")
 }

@@ -1,18 +1,26 @@
-package plugin;
-import org.gradle.api.*
-import org.gradle.jvm.tasks.Jar;
+package plugin
+
+import org.gradle.api.GradleException
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.api.publish.maven.MavenPublication
+import org.gradle.jvm.tasks.Jar
 
 class HelloPlugin implements Plugin<Project> {
 
     @Override
     void apply(Project project) {
+
         project.task('hello') << {
             println "Hello from ${project.name}"
         }
 
         project.extensions.create('dependency', DependencyExtension, project)
 
-        project.repositories.mavenLocal()
+        project.repositories {
+            mavenLocal()
+            // TODO
+        }
 
         if (project.plugins.findPlugin('java')) {
             project.task([type: Jar, dependsOn: 'classes'], 'sourcesJar') {
@@ -40,6 +48,20 @@ class HelloPlugin implements Plugin<Project> {
                         args archivePath
                     }
                 }
+            }
+
+            project.publishing.publications {
+                println("configuring publications for project ${project.name} - ${project.components.java}")
+                java(MavenPublication) {
+                    artifactId = project.archivesBaseName
+                    from project.components.java
+                    artifact project.tasks.sourcesJar
+                    artifact project.tasks.javadocJar
+                    artifact project.tasks.signedJar
+                }
+            }
+            project.publishing.repositories {
+                // TODO
             }
         }
     }

@@ -3,20 +3,8 @@ apply plugin: 'maven-publish'
 apply plugin: 'application'
 apply plugin: 'hello'
 
-group = "com.foo"
-archivesBaseName = "mod1"
-
 mainClassName = 'Mod1Class'
 
 dependencies {
     compile dependency.project(':mod2', "${group}:mod2:1.0.0.SNAPSHOT")
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifactId = archivesBaseName
-        }
-    }
 }

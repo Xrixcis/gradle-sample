@@ -2,17 +2,5 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 apply plugin: 'hello'
 
-group = "com.foo"
-archivesBaseName = "mod4"
-
 dependencies {
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            artifactId = archivesBaseName
-        }
-    }
 }
