@@ -1,0 +1,25 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'hello'
+
+group = "com.foo"
+archivesBaseName = "mod2"
+
+dependencies {
+    if (rootProject == project) {
+        println("${project.name}: using repo dependencies")
+        compile "${group}:mod3:1.0.0.SNAPSHOT"
+    } else {
+        println("${project.name}: using project dependencies")
+        compile project(":mod3")
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId = archivesBaseName
+        }
+    }
+}

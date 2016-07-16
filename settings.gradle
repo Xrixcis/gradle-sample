@@ -1,0 +1,25 @@
+def projects = [
+        [name: 'mod1', branch: 'trunk'],
+        [name: 'mod2', branch: 'development'],
+        [name: 'mod3', branch: 'trunk'],
+        [name: 'share:mod4', branch: 'trunk'],
+        [name: 'foo', branch: 'trunk']
+]
+
+rootProject.name = 'ROOT'
+
+projects.each { pr ->
+    def File prPath = file(pr.name.replaceAll(":", "/"))
+    if (prPath.exists() && prPath.isDirectory()) {
+        include pr.name
+        def p = project ":${pr.name}"
+        def dir = pr.branch == 'trunk' ? "/trunk" : "/branches/" + pr.branch
+        p.projectDir = file prPath.path + dir
+        if (!p.projectDir.exists() || !p.projectDir.isDirectory()) {
+            throw new RuntimeException("${pr.name}: Project branch \"${pr.branch}\" does not exist! (${p.projectDir})")
+        }
+    } else {
+        logger.warn("{}: Project directory does not exist, skipping project", pr.name)
+    }
+}
+
