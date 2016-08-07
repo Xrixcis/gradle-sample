@@ -1,0 +1,17 @@
+apply plugin: 'groovy'
+
+dependencies {
+    compile localGroovy()
+    compile gradleApi()
+    compile 'net.researchgate:gradle-release:2.4.0'
+}
+
+repositories {
+    maven {
+        url 'https://plugins.gradle.org/m2/'
+    }
+}
+
+rootProject.dependencies {
+    runtime project(path)
+}

@@ -1,12 +1,5 @@
-subprojects {
-  apply plugin: "groovy"
-
-  dependencies {
-    compile localGroovy()
-    compile gradleApi()
+repositories {
+  maven {
+    url 'https://plugins.gradle.org/m2/'
   }
-
-rootProject.dependencies {
-  runtime project(path)
-}
 }

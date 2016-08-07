@@ -3,6 +3,6 @@ apply plugin: 'maven-publish'
 apply plugin: 'hello'
 
 dependencies {
-    compile dependency.project(':share:mod4', "${group}:mod4:1.0.0.SNAPSHOT")
+    compile dependency.project(':share:mod4', "${group}:mod4:1.0.0")
 }
 

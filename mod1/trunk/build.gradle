@@ -6,5 +6,5 @@ apply plugin: 'hello'
 mainClassName = 'Mod1Class'
 
 dependencies {
-    compile dependency.project(':mod2', "${group}:mod2:1.0.0.SNAPSHOT")
+    compile dependency.project(':mod2', "${group}:mod2:1.0.0")
 }
